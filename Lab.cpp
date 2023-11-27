@@ -143,14 +143,17 @@ int main(void)
 
     if (lastDigit % 2 == 0)
     {
+        cout<< "You are using selection sort"<<'\n';
         selectionSort(arr, N, key);
     }
     else if (lastDigit % 2 == 1)
     {
+        cout<< "You are using bubble sort"<<'\n';
         bubbleSort(arr, N, key);
     }
     else
     {
+        cout<< "You are using insertion sort"<<'\n';
         insertionSort(arr, N, key);
     }
 }
