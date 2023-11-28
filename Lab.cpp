@@ -41,7 +41,7 @@ void bubbleSort(int arr[], int n, int k)
             }
         }
     }
-    cout << "Sorted array is: ";
+    cout << "Usign (BUBBLE) sort the Sorted array is: ";
     for (int i = 0; i < n; i++)
     {
         cout << arr[i] << " ";
@@ -56,6 +56,21 @@ void bubbleSort(int arr[], int n, int k)
     else
     {
         cout << "Sorry, Try Again" << '\n';
+        int key;
+        while (1)
+        {
+            cout << "Enter the key number you want to search in your array" << '\n';
+            cin >> key;
+            if (binarySearch(arr, n, key) != -1)
+            {
+                cout << "You have found the key value at Index " << binarySearch(arr, n, key) << '\n';
+                break;
+            }
+            else
+            {
+                cout << "Sorry, Try Again" << '\n';
+            }
+        }
     }
 }
 void selectionSort(int arr[], int n, int k)
@@ -74,7 +89,7 @@ void selectionSort(int arr[], int n, int k)
             }
         }
     }
-    cout << "Sorted array is: ";
+    cout << "Using (SELECTION) sort the Sorted array is: ";
     for (int i = 0; i < n; i++)
     {
         cout << arr[i] << " ";
@@ -89,6 +104,21 @@ void selectionSort(int arr[], int n, int k)
     else
     {
         cout << "Sorry, Try Again" << '\n';
+        int key;
+        while (1)
+        {
+            cout << "Enter the key number you want to search in your array" << '\n';
+            cin >> key;
+            if (binarySearch(arr, n, key) != -1)
+            {
+                cout << "You have found the key value at Index " << binarySearch(arr, n, key) << '\n';
+                break;
+            }
+            else
+            {
+                cout << "Sorry, Try Again" << '\n';
+            }
+        }
     }
 }
 void insertionSort(int arr[], int n, int k)
@@ -105,7 +135,7 @@ void insertionSort(int arr[], int n, int k)
         arr[j + 1] = current;
     }
 
-    cout << "Sorted array is: ";
+    cout << "Using (INSERTION) sort the Sorted array is: ";
     for (int i = 0; i < n; i++)
     {
         cout << arr[i] << " ";
@@ -120,6 +150,21 @@ void insertionSort(int arr[], int n, int k)
     else
     {
         cout << "Sorry, Try Again" << '\n';
+        int key;
+        while (1)
+        {
+            cout << "Enter the key number you want to search in your array" << '\n';
+            cin >> key;
+            if (binarySearch(arr, n, key) != -1)
+            {
+                cout << "You have found the key value at Index " << binarySearch(arr, n, key) << '\n';
+                break;
+            }
+            else
+            {
+                cout << "Sorry, Try Again" << '\n';
+            }
+        }
     }
 }
 

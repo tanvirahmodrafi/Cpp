@@ -14,26 +14,47 @@ void printNode(struct node *ptr)
         ptr = ptr->next;
     }
 }
+
+struct node* insertAtBetween(struct node* head,int value,int index){
+    struct node* temp = new node;
+    struct node* t = head;
+    int i = 0;
+    while(i != index-1){
+        t = t->next;
+        i++;
+    }
+
+    temp->value = value;
+    temp->next = t->next;
+    t->next = temp;
+
+    return head;
+
+}
+
+struct node* insertAt1st(struct node* head,int value){
+    struct node* temp = new node;
+    temp->value = value;
+    temp->next = head;
+    return temp;
+}
 int main(void)
 {
-    node *head = new node;
-    node *second = new node;
-    node *tail = new node;
-    node* third = new node;
+    node *head = NULL;
+    
 
-    head->value = 7;
-    head->next = second;
-
-    second->value = 45;
-    second->next = third;
-
-    third -> value = 100;
-    third -> next = tail;
-
-    tail->value = 23;
-    tail->next = NULL;
-
-
+    head = insertAt1st(head,100);
+    head = insertAt1st(head,10);
+    head = insertAt1st(head,106);
+    head = insertAt1st(head,140);
+    // head = insertAt1st(head,120);
+    // head = insertAt1st(head,110);
+    // head = insertAt1st(head,600);
+    // head = insertAt1st(head,104);
+    // head = insertAt1st(head,1110);
+    printNode(head);
+    cout<<"___________"<<endl;
+    head = insertAtBetween(head,104,2);
 
     printNode(head);
 }
