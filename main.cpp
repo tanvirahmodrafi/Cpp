@@ -3,58 +3,83 @@ using namespace std;
 struct node
 {
     int value;
-    struct node *next;
+    struct node* next;
 };
 
-void printNode(struct node *ptr)
-{
-    while (ptr != NULL)
-    {
-        cout << ptr->value << '\n';
-        ptr = ptr->next;
-    }
-}
-
-struct node* insertAtBetween(struct node* head,int value,int index){
+struct node* insertAtHead(struct node* head,int value){
     struct node* temp = new node;
-    struct node* t = head;
-    int i = 0;
-    while(i != index-1){
-        t = t->next;
-        i++;
-    }
-
-    temp->value = value;
-    temp->next = t->next;
-    t->next = temp;
-
-    return head;
-
-}
-
-struct node* insertAt1st(struct node* head,int value){
-    struct node* temp = new node;
-    temp->value = value;
+    temp->value  =  value;
     temp->next = head;
     return temp;
 }
+void display(struct node* head){
+    struct node* temp = head;
+    while(temp!=NULL){
+        cout<<temp->value<<'\n';
+        temp = temp->next;
+    }
+}
+struct node* insertAtLast(struct node* head,int value){
+    struct node* temp = new node;
+    struct node* point = head;
+    while(point->next !=NULL){
+        point = point->next;
+    }
+    temp->value = value;
+    point->next = temp;
+    temp->next = NULL;
+    return head;
+}
+struct node* insertAtBetween(struct node* head,int value,int position){
+    struct node* temp = new node;
+    struct node* point = head;
+    int i = 0;
+    while(i!=position-1){
+        point = point->next;
+        i++;
+    }
+    temp->value = value;
+    temp->next=point->next;
+    point->next = temp;
+    return head;
+}
+
+struct node* insertAtNode(struct node* head,int value,int position){
+    struct node* point = head;
+    int i = 0;
+    while(i!=position-1){
+        point = point->next;
+        i++;
+    }
+    point->value = value;
+    return head;
+}
+
+struct node* deleteHead(struct node* head){
+    head = head->next;
+    return head;
+}
+struct node* deleteAtTail(struct node* head){
+    struct node* point = head;
+    while(point->next->next != NULL){
+        point = point->next;
+    }
+    point->next = NULL;
+    return head;
+}
+
 int main(void)
 {
-    node *head = NULL;
-    
+    struct node* head = NULL;
+    head = insertAtHead(head,2);
+    head = insertAtHead(head,1);
+    head = insertAtLast(head,100);
+    head = insertAtLast(head,200);
+    head = insertAtBetween(head,30,2);
+    head = insertAtBetween(head,50,3);
+    //head = deleteHead(head);
+    head = insertAtNode(head,5,1);
+    head = deleteAtTail(head);
 
-    head = insertAt1st(head,100);
-    head = insertAt1st(head,10);
-    head = insertAt1st(head,106);
-    head = insertAt1st(head,140);
-    // head = insertAt1st(head,120);
-    // head = insertAt1st(head,110);
-    // head = insertAt1st(head,600);
-    // head = insertAt1st(head,104);
-    // head = insertAt1st(head,1110);
-    printNode(head);
-    cout<<"___________"<<endl;
-    head = insertAtBetween(head,104,2);
-
-    printNode(head);
+    display(head);
 }
