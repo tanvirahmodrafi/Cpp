@@ -171,7 +171,7 @@ void insertionSort(int arr[], int n, int k)
 int main(void)
 {
 
-    cout << "Enter your the last digit of your id" << '\n';
+    cout << "Enter the last digit of your id" << '\n';
     cin >> lastDigit;
 
     cout << "Enter the size of array" << '\n';

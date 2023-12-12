@@ -1,59 +1,98 @@
-#include <bits/stdc++.h>
+#include <iostream>
 using namespace std;
-struct Node{
+
+struct node
+{
     int value;
-    struct Node* next;
+    struct node *next;
+    struct node *prev;
+
 };
-struct Node* insertAtFirst(struct Node* head,int value){
-    struct Node* temp = new Node;
-    temp->value = value;
+
+struct node *insertAtHead(struct node *head, int val)
+{
+    struct node *temp = new node;
+    temp->value = val;
     temp->next = head;
-    return temp;
-}
-
-struct Node* insertAtInBetween(struct Node* head,int value,int index){
-    struct Node* temp = new Node;
-    struct Node* t = head;//creating a dummy head
-    int i = 0;
-    while(i != index-1){
-        t = t->next;
-        i++;
-    }
-    temp->value = value;
-    temp->next = t->next;
-    t->next = temp;
+    head = temp;
     return head;
 }
 
-struct Node*insertAtLast(struct Node* head,int value){
-    struct Node * temp = new Node;
-    struct Node * t = head;
-    while(t->next != NULL){
-        t = t->next;
+void display(struct node *head)
+{
+    struct node *cur = head;
+    while (cur != NULL)
+    {
+        cout << cur->value << ' ';
+        cur = cur->next;
     }
-    t->next = temp;
-    temp->value = value;
-    temp->next = NULL;
+}
+
+struct node *insertAtTail(struct node *head, int val)
+{
+    struct node *temp = new node;
+    struct node *cur = head;
+    while (cur->next != NULL)
+    {
+        cur = cur->next;
+    }
+    temp->value = val;
+    temp->next = cur->next;
+    cur->next = temp;
     return head;
 }
-
-void displayNode(struct Node* head){
-    while(head!=NULL){//untill head is not 
-        cout << head->value << '\n';
-        head = head->next;//Shifting the head to the next node
+struct node *insertAtK(struct node *head, int val, int k)
+{
+    struct node *temp = new node;
+    struct node *cur = head;
+    for (int i = 1; i < k; i++)
+    {
+        cur = cur->next;
     }
+    temp->value = val;
+    temp->next = cur->next;
+    cur->next = temp;
+    return head;
+}
+struct node* deleteAtHead(struct node *head){
+    head = head ->next;
+    return head;
+}
+struct node* deleteAttail(struct node *head){
+    struct node *cur = head;
+    while (cur->next->next != NULL)
+    {
+        cur = cur->next;
+    }
+    cur->next = NULL;
+
+    return head;  
+}
+struct node* deleteAtK(struct node *head, int k){
+    struct node *cur = head;
+    for (int i = 1; i < k-1; i++)
+    {
+        cur = cur->next;
+    }
+    cur->next = cur->next->next;
+    return head;
+
 }
 
-int main(void){
-    struct Node * head = NULL;
-    
-    head = insertAtFirst(head,1);
-    head = insertAtFirst(head,10);
-    head = insertAtLast(head,5);
-    head = insertAtLast(head,6);
-    displayNode(head);
+int main(void)
+{
+    struct node *head = NULL;
 
-
-
-    
+    head = insertAtHead(head, 19);
+    head = insertAtHead(head, 13);
+    head = insertAtHead(head, 14);
+    head = insertAtHead(head, 8);
+    head = insertAtHead(head, 5);
+    head = insertAtTail(head, 7);
+    head = insertAtK(head,1,3);
+    display(head);
+    cout << '\n';
+    head = deleteAtK(head,3);
+    display(head);
+    return 0;
 }

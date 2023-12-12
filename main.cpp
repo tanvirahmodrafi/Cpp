@@ -8,7 +8,7 @@ struct node
 
 struct node* insertAtHead(struct node* head,int value){
     struct node* temp = new node;
-    temp->value  =  value;
+    temp->value = value;
     temp->next = head;
     return temp;
 }
@@ -22,7 +22,7 @@ void display(struct node* head){
 struct node* insertAtLast(struct node* head,int value){
     struct node* temp = new node;
     struct node* point = head;
-    while(point->next !=NULL){
+    while(point->next != NULL){
         point = point->next;
     }
     temp->value = value;
