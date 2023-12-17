@@ -1,39 +1,23 @@
 #include <bits/stdc++.h>
 using namespace std;
-struct node{
-    int value;
-    struct node* next;
-    struct node* prev;
-};
-struct node* head = NULL;
-
-struct node* insertAtHead(int value){
-    struct node* temp = new node;
-    temp->value = value;
-    temp->next = head;
-    temp->prev = NULL;
-
-    if (head != NULL) {
-        head->prev = temp;
+int main(){
+    int arr[5]={2,9,1,5,3};
+    int count = 5;
+    for (int i = 1; i < count; i++)
+    {
+        int cur = arr[i];
+        int j = i-1;
+        while(j>=0 && arr[j] > cur){
+            arr[j+1] = arr[j];
+            j--;
+        }
+        arr[j+1] = cur;
     }
     
-    head = temp;
-    return head;
-}
-
-void display()
-{
-    struct node *cur = head;
-    while (cur != NULL)
+    for (int i = 0; i < count; i++)
     {
-        cout << cur->value << ' ';
-        cur = cur->next;
+        cout<<arr[i]<<' ';
     }
-}
-
-int main()
-{
-    head = insertAtHead(5);
-    display();
-    return 0;
+    
+    
 }

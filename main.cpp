@@ -1,85 +1,78 @@
 #include <bits/stdc++.h>
 using namespace std;
-struct node
-{
-    int value;
-    struct node* next;
+struct stacks {
+    int top;
+    int size;
+    int *arr;
 };
-
-struct node* insertAtHead(struct node* head,int value){
-    struct node* temp = new node;
-    temp->value = value;
-    temp->next = head;
-    return temp;
-}
-void display(struct node* head){
-    struct node* temp = head;
-    while(temp!=NULL){
-        cout<<temp->value<<'\n';
-        temp = temp->next;
-    }
-}
-struct node* insertAtLast(struct node* head,int value){
-    struct node* temp = new node;
-    struct node* point = head;
-    while(point->next != NULL){
-        point = point->next;
-    }
-    temp->value = value;
-    point->next = temp;
-    temp->next = NULL;
-    return head;
-}
-struct node* insertAtBetween(struct node* head,int value,int position){
-    struct node* temp = new node;
-    struct node* point = head;
-    int i = 0;
-    while(i!=position-1){
-        point = point->next;
-        i++;
-    }
-    temp->value = value;
-    temp->next=point->next;
-    point->next = temp;
-    return head;
+struct stacks* createStack(int value){
+    struct stacks *stack = new stacks;
+    stack->top = -1;
+    stack->size = value;
+    stack-> arr = new int[stack->size];
+    return stack;
 }
 
-struct node* insertAtNode(struct node* head,int value,int position){
-    struct node* point = head;
-    int i = 0;
-    while(i!=position-1){
-        point = point->next;
-        i++;
+void isEmpty(struct stacks * ptr){
+    if(ptr->top == -1){
+        cout<< "empty\n";
+        return;
     }
-    point->value = value;
-    return head;
+    cout << "Not empty\n";
 }
 
-struct node* deleteHead(struct node* head){
-    head = head->next;
-    return head;
-}
-struct node* deleteAtTail(struct node* head){
-    struct node* point = head;
-    while(point->next->next != NULL){
-        point = point->next;
+void isFull(struct stacks* ptr){
+    if (ptr->top == (ptr->size)-1){
+        cout << "Stacks full\n";
+        return;
     }
-    point->next = NULL;
-    return head;
+    cout<< "Stacks is not full\n";
+}
+void push(struct stacks* ptr,int val){
+    if(ptr->top == (ptr->size)-1){
+        cout<< "Stacks full\n";
+        return;
+    }
+    ptr->top++;
+    ptr->arr[ptr->top] = val;
+}
+void pop(struct stacks* ptr){
+    if(ptr->top == -1){
+        cout<< "Stacks empty\n";
+        return;
+    }
+    ptr->top--;
+}
+void peek(struct stacks* ptr){
+    if(ptr->top == -1){
+        cout<< "Stacks empty\n";
+        return;
+    }
+    cout<<ptr->arr[ptr->top];
+}
+void firstTolast(struct stacks* ptr){
+    int temp = ptr->arr[ptr->top];
+    int aer[ptr->size];
+    aer[0] = temp;
+    for (int i = 1; i < ptr->size; i++)
+    {
+        aer[i] = ptr->arr[i-1];
+    }
+    for (int i = 0; i < ptr->size; i++)
+    {
+        cout<<aer[i]<<' ';
+    }
+    
 }
 
-int main(void)
-{
-    struct node* head = NULL;
-    head = insertAtHead(head,2);
-    head = insertAtHead(head,1);
-    head = insertAtLast(head,100);
-    head = insertAtLast(head,200);
-    head = insertAtBetween(head,30,2);
-    head = insertAtBetween(head,50,3);
-    //head = deleteHead(head);
-    head = insertAtNode(head,5,1);
-    head = deleteAtTail(head);
+int main(){
+    struct stacks* ptr = createStack(4);
+    push(ptr,2);
+    push(ptr,3);
+    push(ptr,7);
+    push(ptr,1);
+    firstTolast(ptr);
 
-    display(head);
+
 }
+
