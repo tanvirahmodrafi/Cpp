@@ -2,15 +2,13 @@
 using namespace std;
 
 int main(){
-    for (int  i = 1,j = 10; i < 10; i++)
-    {
-        while(j>0){
-            int k =1;
-            while(k<i*j){
-                k/=2;
-            }
-            j--;
-        }
+    string input;
+    cin >> input;
+    if (input.size() <= 10){
+        cout << input;
+    }
+    else{
+        cout << input[0]<<input.size()-2<<input[input.size()-1];
     }
     
 }
