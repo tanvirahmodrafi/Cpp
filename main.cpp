@@ -1,78 +1,72 @@
 #include <bits/stdc++.h>
 using namespace std;
-struct stacks {
-    int top;
+struct kew {
     int size;
+    int front;
+    int rear;
+    int occupied;
     int *arr;
 };
-struct stacks* createStack(int value){
-    struct stacks *stack = new stacks;
-    stack->top = -1;
-    stack->size = value;
-    stack-> arr = new int[stack->size];
-    return stack;
+
+struct kew* creatQueue(int val){
+    struct kew* queue = new kew;
+    queue->front = 0;
+    queue->size = val;
+    queue->occupied = 0;
+    queue->rear = 0;
+    queue->arr = new int[val];
+    return queue;
 }
 
-void isEmpty(struct stacks * ptr){
-    if(ptr->top == -1){
-        cout<< "empty\n";
+int isEmpty(struct kew* ptr){
+    return ptr->occupied == 0;
+}
+
+int isFull(struct kew* ptr){
+    return ptr->occupied == ptr->size;
+}
+
+void enqueue(struct kew* ptr,int val){
+    if(isFull(ptr)){
+        cout<<"Full";
         return;
     }
-    cout << "Not empty\n";
+    ptr->arr[ptr->rear] = val;
+    ptr->rear =(ptr->rear + 1)% ptr->size;
+    ptr->occupied++;
 }
 
-void isFull(struct stacks* ptr){
-    if (ptr->top == (ptr->size)-1){
-        cout << "Stacks full\n";
+void dequeue(struct kew* ptr){
+    if(isEmpty(ptr)){
+        cout<<"Empty";
         return;
     }
-    cout<< "Stacks is not full\n";
+    ptr->front = (ptr->front+1) % ptr->size;
+    ptr->occupied--;
 }
-void push(struct stacks* ptr,int val){
-    if(ptr->top == (ptr->size)-1){
-        cout<< "Stacks full\n";
+
+void top(struct kew* ptr){
+    if(isEmpty(ptr)){
+        cout<<"Empty";
         return;
     }
-    ptr->top++;
-    ptr->arr[ptr->top] = val;
+    cout<<ptr->arr[ptr->front % ptr->size];
 }
-void pop(struct stacks* ptr){
-    if(ptr->top == -1){
-        cout<< "Stacks empty\n";
+
+void lastElement(struct kew* ptr){
+    if(isEmpty(ptr)){
+        cout << "Empty";
         return;
     }
-    ptr->top--;
-}
-void peek(struct stacks* ptr){
-    if(ptr->top == -1){
-        cout<< "Stacks empty\n";
-        return;
-    }
-    cout<<ptr->arr[ptr->top];
-}
-void firstTolast(struct stacks* ptr){
-    int temp = ptr->arr[ptr->top];
-    int aer[ptr->size];
-    aer[0] = temp;
-    for (int i = 1; i < ptr->size; i++)
-    {
-        aer[i] = ptr->arr[i-1];
-    }
-    for (int i = 0; i < ptr->size; i++)
-    {
-        cout<<aer[i]<<' ';
-    }
-    
+    int lastIndex = (ptr->rear - 1 + ptr->size) % ptr->size;
+    cout << "Last Element: " << ptr->arr[lastIndex]<<'\n';
 }
 
-int main(){
-    struct stacks* ptr = createStack(4);
-    push(ptr,2);
-    push(ptr,3);
-    push(ptr,7);
-    push(ptr,1);
-    firstTolast(ptr);
-
+int main(void){
+    struct kew* ptr = creatQueue(4);
+    enqueue(ptr,5);
+    enqueue(ptr,8);
+    top(ptr);
+    lastElement(ptr);
 
 }
-
