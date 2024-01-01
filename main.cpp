@@ -62,11 +62,27 @@ void lastElement(struct kew* ptr){
     cout << "Last Element: " << ptr->arr[lastIndex]<<'\n';
 }
 
+void display(struct kew* ptr){
+    if(isEmpty(ptr)){
+        cout << "Empty";
+        return;
+    }
+    int index = ptr->front;
+    for (int i = 0; i < ptr->occupied; i++)
+    {
+        cout<<ptr->arr[index]<<' ';
+        index = (index + 1)%ptr->size;
+    } 
+}
+
 int main(void){
     struct kew* ptr = creatQueue(4);
     enqueue(ptr,5);
     enqueue(ptr,8);
-    top(ptr);
-    lastElement(ptr);
+    enqueue(ptr,0);
+    enqueue(ptr,2);
+    // top(ptr);
+    // lastElement(ptr);
+    display(ptr);
 
 }

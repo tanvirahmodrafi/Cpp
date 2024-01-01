@@ -1,69 +1,169 @@
+// #include <iostream>
+
+// using namespace std;
+
+// struct stack{
+//     int top;
+//     int size;
+//     int *items;
+
+// };
+
+// int capacity;
+
+// stack *createStack()
+// {
+//     stack *pt = new stack();
+//     pt->size= capacity;
+//     pt->top = -1;
+//     pt->items = new int(capacity);
+//     return pt;
+// }
+
+
+// int arr[100];
+
+// void bubblesort(int n)
+// {
+//     for(int i=0;i<n;i++)
+//     {
+//         for(int j=0;j<n-i-1;j++)
+//         {
+//             if(arr[j]>arr[j+1])
+//             {
+//                 int temp=arr[j];
+//                 arr[j]=arr[j+1];
+//                 arr[j+1]=temp;
+//             }
+
+//         }
+//     }
+// }
+
+// stack newPush() {
+//     cout<<"Enter the size of the stack\n";
+//     cin>>capacity;
+//     stack *pt =createStack();
+//     int i=0;
+//     while(i<capacity-1) {
+//         cout<<"Press 1 to input\n"
+//             <<"Press 2 to terminate";
+//         int decision;
+//         cin>>decision;
+//         if(decision ==2)
+//             break;
+//         else {
+//             cin>>arr[i];
+//         }
+//         i++;
+//     }
+//     bubblesort(i+1);
+//     int n =i;
+
+//     while(pt->top<capacity)
+//     {
+//         pt->top++;
+//         pt->items[pt->top] = arr[n-i];
+//         i--;
+//     }
+//     return *pt;
+// }
+
+
+
+
+// int main(){
+//     stack myStack = newPush();
+//     for(int i = 0; i<myStack.top;i++) {
+//         cout<<myStack.items[i]<<endl;
+//     }
+//     return 0;
+// }
+
 #include <iostream>
+
 using namespace std;
 
-struct Queue {
-    int queueSize;
-    int front;
-    int rear;
-    int occupied;
-    int *items;
-};
+struct stack{
+    int data;
+    stack *next;
+} *head, *temp;
 
-int isFull(struct Queue *queue) {
-    return (queue->occupied == queue->queueSize);
+int arr[100];
+
+void bubblesort(int n)
+{
+    for(int i=0;i<n;i++)
+    {
+        for(int j=0;j<n-i-1;j++)
+        {
+            if(arr[j]>arr[j+1])
+            {
+                int temp=arr[j];
+                arr[j]=arr[j+1];
+                arr[j+1]=temp;
+            }
+
+        }
+    }
 }
 
-int isEmpty(struct Queue *queue) {
-    return (queue->occupied == 0);
+void newPush() {
+    int i=0;
+    while(1) {
+        cout<<"Press 1 to input\n"
+            <<"Press 2 to terminate";
+        int decision;
+        cin>>decision;
+        if(decision ==2)
+            break;
+        else {
+            cin>>arr[i];
+        }
+        i++;
+    }
+    bubblesort(i+1);
+    int n =i;
+    while(i--)
+    {
+        if(head == NULL)
+        {
+            head = new stack;
+            head->next= NULL;
+            head->data = arr[n-i];
+        }
+        else
+        {
+            temp = new stack;
+            temp->data = arr[n-i];
+            temp->next = head;
+            head = temp;
+        }
+    }
 }
 
-struct Queue *createQueue(int size) {
-    Queue *ptr = new Queue;
-    ptr->queueSize = size;
-    ptr->front = 0;
-    ptr->rear = -1; // Initializing rear to -1
-    ptr->occupied = 0;
-    ptr->items = new int[size];
-    return ptr;
-}
-
-void enQueue(struct Queue *ptr, int val) {
-    if (isFull(ptr)) {
-        cout << "Queue is full\n";
+void display()
+{
+    stack *cur  = head;
+    if(cur == NULL)
+    {
+        cout<<"The stack is empty\n";
         return;
     }
-    ptr->rear = (ptr->rear + 1) % ptr->queueSize;
-    ptr->items[ptr->rear] = val;
-    ptr->occupied++;
-}
-
-void deQueue(struct Queue *ptr) {
-    if (isEmpty(ptr)) {
-        cout << "Queue is empty\n";
-        return;
+    else
+    {
+        while(cur!=NULL)
+        {
+            cout<<cur->data<<endl;
+            cur= cur->next;
+        }
     }
-    ptr->front = (ptr->front + 1) % ptr->queueSize;
-    ptr->occupied--;
 }
 
-void top(struct Queue *ptr) {
-    if (isEmpty(ptr)) {
-        cout << "Queue is empty\n";
-        return;
-    }
-    cout << ptr->items[ptr->front] << endl;
-}
 
-int main() {
-    Queue *myQueue = createQueue(5);
-    enQueue(myQueue, 10);
-    enQueue(myQueue, 20);
-    enQueue(myQueue, 30);
-    top(myQueue); // Output: 10
-    deQueue(myQueue);
-    top(myQueue); // Output: 20
-    enQueue(myQueue, 40);
-    enQueue(myQueue, 50);
-    enQueue(myQueue, 60); // Output: Queue is full
+int main(){
+    head = NULL;
+    newPush();
+    display();
     return 0;
 }
