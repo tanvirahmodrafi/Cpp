@@ -25,57 +25,56 @@ void insertAtLast(int value)
     temp->value = value;
     temp->next = NULL;
 }
-// void search(int value)
-// {
-//     struct node *cur = head;
-//     struct node *prev = NULL;
-
-//     while (cur != NULL && cur->value != value)
-//     {
-//         prev = cur;
-//         cur = cur->next;
-//     }
-
-//     if (cur != NULL)
-//     {
-//         if (prev != NULL)
-//         {
-//             prev->next = cur->next;
-//             cur->next = head;
-//             head = cur;
-//         }
-
-//         else if (cur != head)
-//         {
-
-//             head = cur;
-//         }
-//     }
-//     else
-//     {
-
-//         insertAtLast(value);
-//     }
-// }
-void search(int val){
+void maxOrMin()
+{
+    int min = INT_MAX;
+    int max = INT_MIN;
+    struct node *Nmin = head;
+    struct node *Nmax = head;
     struct node *cur = head;
-    struct node *prev = head;
-    while(cur != NULL&& cur->value != val)
-    {   
+    while (cur != NULL)
+    {
+        if (cur->value < min)
+        {
+            min = cur->value;
+            Nmin = cur;
+        }
+        else if (cur->value > max)
+        {
+            max = cur->value;
+            Nmax = cur;
+        }
         cur = cur->next;
     }
-    if(cur != NULL&& cur != head){
-        while(prev->next != cur){
+    swap(Nmax->value, Nmin->value);
+}
+void search(int val)
+{
+    struct node *cur = head;
+    struct node *prev = head;
+    while (cur != NULL && cur->value != val)
+    {
+        cur = cur->next;
+    }
+    if (cur != NULL && cur != head)
+    {
+        while (prev->next != cur)
+        {
             prev = prev->next;
         }
-    }else if(cur == head){
+    }
+    else if (cur == head)
+    {
         return;
     }
-    if(cur != NULL){
+    if (cur != NULL)
+    {
         prev->next = cur->next;
         cur->next = head;
         head = cur;
-    }else{
+    }
+    else
+    {
         insertAtLast(val);
     }
 }
@@ -88,9 +87,7 @@ void display()
         cout << temp->value << ' ';
         temp = temp->next;
     }
-    
 }
-
 
 int main()
 {
@@ -99,7 +96,7 @@ int main()
     insertAtLast(8);
     insertAtFirst(0);
 
-    //display();
+    // display();
 
     search(8);
     display();

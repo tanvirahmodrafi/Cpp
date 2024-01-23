@@ -38,33 +38,6 @@ void display()
     
 }
 
-void maxOrMin(){
-    int min = INT_MAX;
-    int max = INT_MIN;
-    struct node* Nmin = head;
-    struct node* Nmax = head;
-    struct node* cur = head;
-    while(cur != NULL){
-        if(cur->value < min){
-            min = cur->value;
-            Nmin = cur;
-        }
-        else if(cur->value > max){
-            max = cur->value;
-            Nmax = cur;
-        }
-        cur = cur->next;
-    }
-    swap(Nmax->value, Nmin->value);
-}
-
 int main(){
-    insertAtFirst(9);
-    insertAtLast(11);
-    insertAtLast(7);
-    //insertAtFirst(7);
-    insertAtLast(10);
     
-    //maxOrMin();
-    display();
 }
