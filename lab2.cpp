@@ -41,8 +41,8 @@ void push(struct stacks *ptr, int val)
         cout << "Stacks full\n";
         return;
     }
-    ptr->top++;
-    ptr->arr[ptr->top] = val;
+    //ptr->top++;
+    ptr->arr[ptr->top++] = val;
 }
 void pop(struct stacks *ptr)
 {
@@ -58,7 +58,7 @@ int peek(struct stacks *ptr)
     if (ptr->top == -1)
     {
         cout << "Stacks empty\n";
-        return -1000;
+        return -10000;
     }
     return ptr->arr[ptr->top];
 }
@@ -106,8 +106,6 @@ void secondNext(struct stacks *ptr){
         push(newSt,peek(ptr)); 
         pop(ptr);
     }
-
-    
     for (int i = 0; i <= ptr->top; i++)
     {
         if(var == peek(newSt)){
