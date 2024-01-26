@@ -18,20 +18,20 @@ int isEmpty(struct stacks *ptr)
 {
     if (ptr->top == -1)
     {
-        cout << "empty\n";
+        //cout << "empty\n";
         return 1;
     }
-    cout << "Not empty\n";
+    //cout << "Not empty\n";
     return 0;
 }
 int isFull(struct stacks *ptr)
 {
     if (ptr->top == (ptr->size) - 1)
     {
-        cout << "Stacks full\n";
+        //cout << "Stacks full\n";
         return 1;
     }
-    cout << "Stacks is not full\n";
+    //cout << "Stacks is not full\n";
     return 0;
 }
 void push(struct stacks *ptr, int val)
@@ -41,7 +41,7 @@ void push(struct stacks *ptr, int val)
         cout << "Stacks full\n";
         return;
     }
-    //ptr->top++;
+    // ptr->top++;
     ptr->arr[ptr->top++] = val;
 }
 void pop(struct stacks *ptr)
@@ -95,29 +95,53 @@ void firstTolast(struct stacks *ptr)
         cout << aer[i] << ' ';
     }
 }
-void secondNext(struct stacks *ptr){
+void secondNext(struct stacks *ptr)
+{
     int var = INT_MIN;
-    stacks * newSt = createStack(ptr->size);
+    stacks *newSt = createStack(ptr->size);
     for (int i = 0; i <= ptr->top; i++)
     {
-        if(peek(ptr) > var){
+        if (peek(ptr) > var)
+        {
             var = peek(ptr);
         }
-        push(newSt,peek(ptr)); 
+        push(newSt, peek(ptr));
         pop(ptr);
     }
     for (int i = 0; i <= ptr->top; i++)
     {
-        if(var == peek(newSt)){
+        if (var == peek(newSt))
+        {
             pop(newSt);
             continue;
         }
-        push(ptr,peek(newSt));
+        push(ptr, peek(newSt));
         pop(newSt);
     }
-    for(int i = 0; i < ptr->top; i++){
-        cout <<ptr->arr[i]<<' ';
+    for (int i = 0; i < ptr->top; i++)
+    {
+        cout << ptr->arr[i] << ' ';
     }
+}
+int hi(stacks *ptr)
+{
+    int var = INT_MIN;
+    stacks *newSt = createStack(ptr->size);
+    while (!isEmpty(ptr))
+    {
+        if (peek(ptr) > var)
+        {
+            var = peek(ptr);
+        }
+        push(newSt, peek(ptr));
+        pop(ptr);
+    }
+    while (!isEmpty(newSt))
+    {
+        push(ptr, peek(newSt));
+        pop(newSt);
+    }
+    return var;
 }
 
 int main()
@@ -127,7 +151,8 @@ int main()
     push(ptr, 3);
     push(ptr, 7);
     push(ptr, 1);
-    secondNext(ptr);
+    // secondNext(ptr);
+    cout<< hi(ptr);
 
     // firstTolast(ptr);
 }
