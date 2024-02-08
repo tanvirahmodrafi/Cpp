@@ -1,26 +1,91 @@
-#include <iostream>
-
+#include <bits/stdc++.h>
 using namespace std;
+struct Node
+{
+   int value;
+   struct Node *next;
+};
+struct Node *head = NULL;
 
-int main() {
-    int n;
-    cin >> n;
+void *insertAtFirst(struct Node *head, int value)
+{
+   struct Node *temp = new Node;
+   temp->value = value;
+   temp->next = head;
+   head = temp;
+   
+}
 
-    int sum_x = 0, sum_y = 0, sum_z = 0;
-    int x, y, z;
+void *insertAtInBetween(struct Node *head, int value, int index)
+{
+   struct Node *temp = new Node;
+   struct Node *t = head; 
+   int i = 0;
+   while (i != index - 1)
+   {
+      t = t->next;
+      i++;
+   }
+   temp->value = value;
+   temp->next = t->next;
+   t->next = temp;
+}
 
-    for (int i = 0; i < n; i++) {
-        cin >> x >> y >> z;
-        sum_x += x;
-        sum_y += y;
-        sum_z += z;
-    }
+void *insertAtLast(struct Node *head, int value)
+{
+   struct Node *temp = new Node;
+   struct Node *t = head;
+   while (t->next != NULL)
+   {
+      t = t->next;
+   }
+   t->next = temp;
+   temp->value = value;
+   temp->next = NULL;
+   
+}
 
-    if (sum_x == 0 && sum_y == 0 && sum_z == 0) {
-        cout << "YES\n";
-    } else {
-        cout << "NO\n";
-    }
+void displayNode(struct Node *head)
+{
+   while (head != NULL)
+   { 
+      cout << head->value << '\n';
+      head = head->next;
+   }
+}
 
-    return 0;
+void *deleteHead(struct Node *head)
+{
+   head = head->next;
+   return head;
+}
+
+void *deleteAtTail(struct Node *head)
+{
+   struct Node *point = head;
+   while (point->next->next != NULL)
+   {
+      point = point->next;
+   }
+   point->next = NULL;
+   return head;
+}
+
+int sum(){
+
+}
+
+
+
+
+
+
+
+
+struct Node* deleteNode(struct Node *head,int val){
+   
+}
+int main(void)
+{
+
 }
