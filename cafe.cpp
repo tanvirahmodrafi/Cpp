@@ -1,18 +1,50 @@
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
 
-int main() {
-    string inp, neo;
-    cin >> inp;
-    
-    for (int i = 0; i < inp.length(); i++) {
-        char current = tolower(inp[i]);
-        if (current != 'a' && current != 'e' && current != 'i' && current != 'o' && current != 'u' && current != 'y') {
-            neo += '.';
-            neo += current;
+struct team
+{
+    string name;
+    int score = 0;
+};
+bool isEmpty(string name)
+{
+    if (name.length() == 0)
+    {
+        return 1;
+    }
+    return 0;
+}
+int main()
+{
+    int n;
+    cin >> n;
+    struct team team1;
+    struct team team2;
+    string inp;
+    while (n--)
+    {
+        cin >> inp;
+        if (isEmpty(team1.name))
+        {
+            team1.name = inp;
+            team1.score++;
+        }
+        else if (team1.name == inp)
+        {
+            team1.score++;
+        }
+        else
+        {
+            team2.name = inp;
+            team2.score++;
         }
     }
-    
-    cout << neo << '\n';
+
+    if (team1.score > team2.score)
+    {
+        cout << team1.name;
+        return 0;
+    }
+    cout << team2.name;
     return 0;
 }

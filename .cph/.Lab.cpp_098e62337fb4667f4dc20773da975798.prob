@@ -1,0 +1,1 @@
+{"name":"Local: Lab","url":"/Applications/PlayGround/Programming/Cpp/Lab.cpp","tests":[{"id":1708137847650,"input":"4,2,7,6,9,14,12 5 1","output":"4"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/Applications/PlayGround/Programming/Cpp/Lab.cpp","group":"local","local":true}
