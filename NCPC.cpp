@@ -2,27 +2,27 @@
 #include <bits/stdc++.h>
 #include <string>
 using namespace std;
-int maxProfit(vector<int>& prices) {
-    int max= INT_MIN;
-    for (int i = 0; i < prices.size()-1; i++)
+
+int strStr(string haystack, string needle) {
+    //haystack boro
+    //needle choto
+
+    for (int i = 0; i < haystack.length()+1-needle.length(); i++)
     {
-        for (int j = i+1; j < prices.size(); j++)
-        {
-            if(max < (prices[j]-prices[i])){
-                max = prices[j]-prices[i];
-            }
+        string j = haystack.substr(i,needle.length());
+        if(j == needle){
+            return i;
         }
     }
-    return max;
+    return -1;
+        
 }
 
 int main()
 {
-
-   for(int i =1;i<=31;i++){
-        cout<<i<<": "<<endl;
-    }
-
+    cout<<strStr("sad","sad")<<endl;
+    string str = "sadbutsad", n = "sad";
+    cout<<str.substr(0,n.length());
 
 
     return 0;
