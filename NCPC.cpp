@@ -19,14 +19,10 @@ int maxProfit(vector<int>& prices) {
 int main()
 {
 
-   vector<int> prices;
-   prices.push_back(7);
-   prices.push_back(1);
-   prices.push_back(5);
-   prices.push_back(3);
-   prices.push_back(6);
-   prices.push_back(4);
-   cout<<maxProfit(prices)<<endl;
+   for(int i =1;i<=31;i++){
+        cout<<i<<": "<<endl;
+    }
+
 
 
     return 0;
