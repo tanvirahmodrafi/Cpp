@@ -2,30 +2,29 @@
 #include <bits/stdc++.h>
 #include <string>
 using namespace std;
+struct ListNode {
+    int data;
+    ListNode* next;
+    ListNode(int value) : data(value), next(nullptr) {}
+};
 
-bool isIsomorphic(string s, string t) {
-    if(s.length() != t.length()) return false;
-    unordered_map<char,char> seen;
-    for (int i = 0; i < s.length(); i++)
-    {
-        char ch = s[i];
-        char ta = t[i];
-        if(seen.find(ch) != seen.end()){
-            if(seen[ch] != ta) return false;
+bool hasCycle(ListNode *head) {
+    unordered_set<ListNode*> seen;
+    ListNode * cur = head;
+    while(cur != nullptr) {
+        if(seen.find(cur) != seen.end()){
+            return true;
+        }else{
+            seen.insert(cur);
         }
-        for (const auto& pair : seen) {
-            if (pair.second == ta && pair.first != ch) {
-                return false;
-            }
-        }
-         
     }
-    return true;
+    return false;
+
 }
 
 int main()
 {
-    cout<< isIsomorphic("egg","add")<< endl;
+    cout<< hasCycle;
 
     return 0;
 }
