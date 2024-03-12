@@ -2,29 +2,46 @@
 #include <bits/stdc++.h>
 #include <string>
 using namespace std;
-struct ListNode {
-    int data;
-    ListNode* next;
-    ListNode(int value) : data(value), next(nullptr) {}
-};
+int bs(vector<int> nums,int target){
+    int start = 0;
+    int end = nums.size()-1;
+    int mid;
+    if(nums[0]>= target){
+        return 0;
+    }
 
-bool hasCycle(ListNode *head) {
-    unordered_set<ListNode*> seen;
-    ListNode * cur = head;
-    while(cur != nullptr) {
-        if(seen.find(cur) != seen.end()){
-            return true;
-        }else{
-            seen.insert(cur);
+    while (start <= end){
+        mid = (start + end) / 2;
+
+        if (nums[mid] == target){
+            return mid;
+        }
+        else if (nums[mid] > target){
+            end = mid - 1;
+        }
+        else{
+            start = mid + 1;
         }
     }
-    return false;
+    if(nums[mid]<target){
+    return mid+1;}
+    return mid;
 
 }
 
 int main()
 {
-    cout<< hasCycle;
+    vector<int> nums;
+    nums.push_back(1);
+    nums.push_back(3);
+    nums.push_back(5);
+    nums.push_back(6);
+    // nums.push_back();
+    // nums.push_back();
+    // nums.push_back();
+    // nums.push_back();
+    // nums.push_back();
+    cout<<bs(nums,2);
 
     return 0;
 }
