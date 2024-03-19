@@ -1,91 +1,32 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <unordered_set>
 using namespace std;
-struct Node
-{
-   int value;
-   struct Node *next;
-};
-struct Node *head = NULL;
 
-void *insertAtFirst(struct Node *head, int value)
+int main()
 {
-   struct Node *temp = new Node;
-   temp->value = value;
-   temp->next = head;
-   head = temp;
+   int n;
+   cin >> n;
+   int arr[n];
    
-}
-
-void *insertAtInBetween(struct Node *head, int value, int index)
-{
-   struct Node *temp = new Node;
-   struct Node *t = head; 
-   int i = 0;
-   while (i != index - 1)
+   for (int i = 0; i < n; i++)
    {
-      t = t->next;
-      i++;
+      cin >> arr[i];
    }
-   temp->value = value;
-   temp->next = t->next;
-   t->next = temp;
-}
-
-void *insertAtLast(struct Node *head, int value)
-{
-   struct Node *temp = new Node;
-   struct Node *t = head;
-   while (t->next != NULL)
-   {
-      t = t->next;
-   }
-   t->next = temp;
-   temp->value = value;
-   temp->next = NULL;
    
-}
-
-void displayNode(struct Node *head)
-{
-   while (head != NULL)
-   { 
-      cout << head->value << '\n';
-      head = head->next;
-   }
-}
-
-void *deleteHead(struct Node *head)
-{
-   head = head->next;
-   return head;
-}
-
-void *deleteAtTail(struct Node *head)
-{
-   struct Node *point = head;
-   while (point->next->next != NULL)
+   for (int i = 1; i < n; i++)
    {
-      point = point->next;
+      int current = arr[i];
+      int j = i - 1;
+      while (j >= 0 && arr[j] > current)
+      {
+         arr[j + 1] = arr[j];
+         j--;
+      }
+      arr[j + 1] = current;
    }
-   point->next = NULL;
-   return head;
-}
-
-int sum(){
-
-}
-
-
-
-
-
-
-
-
-struct Node* deleteNode(struct Node *head,int val){
-   
-}
-int main(void)
-{
-
+   for (int i = 0; i < n; i++)
+   {
+      cout << arr[i] << " ";
+   }
+   return 0;
 }
