@@ -88,6 +88,33 @@ void display()
         temp = temp->next;
     }
 }
+void minNode(){
+    int min = INT_MAX;
+    struct node *cur = head;
+    struct node *cur2 = head;
+    while(cur->next != NULL){
+        if(cur->value < min){
+            min = cur->value;
+            cur2 = cur;
+        }
+        cur = cur->next;
+    }
+    cur = head;
+    while(cur->next != cur2){
+        cur = cur->next;
+    }
+    cur->next = cur2->next;
+    cur2->next = head;
+    head = cur2;
+}
+void si(){
+    struct node *cur = head;
+    while(cur->next->next != head){
+        cur = cur->next;
+    }
+    cur->next = head;
+}
+
 
 int main()
 {
