@@ -5,7 +5,6 @@ unordered_map<int, int> num;
 
 int main()
 {
-    
     int n;
     cin >> n;
     for (int i = 0; i < n; i++)
@@ -14,7 +13,7 @@ int main()
         cin >> numb;
         num[numb]++;
     }
-    int ans;
+    int ans = 0;
 
     for (const auto& pair : num) {
 
@@ -22,13 +21,14 @@ int main()
         int s = pair.second;
 
         if(f == s) {
-
+            continue;
+        }else if(f < s) {
+            ans += (s-f);
+        }else{
+            ans += s;
         }
-
-
-
-        cout << "Element: " << pair.first << " Count: " << pair.second << endl;
     }
+    cout << ans << endl;
        
     return 0;
 }
