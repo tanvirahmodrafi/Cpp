@@ -1,63 +1,34 @@
 #include <bits/stdc++.h>
 #include <unordered_set>
 using namespace std;
+unordered_map<int, int> num;
 
 int main()
 {
-    unordered_set<int> vals;
-    int target, inp;
-    cin >> inp;
-    int nums[inp];
-
-    for (int i = 0; i < inp; i++)
+    
+    int n;
+    cin >> n;
+    for (int i = 0; i < n; i++)
     {
-        cin >> nums[i];
+        int numb;
+        cin >> numb;
+        num[numb]++;
     }
-    cin >> target;
+    int ans;
 
-    for (int i = 0; i < 7; i++)
-    {
-        vals.insert(nums[i]);
-    }
+    for (const auto& pair : num) {
 
-    for (int i = 0; i < 7; i++)
-    {
-        int n = target - nums[i];
-        if (vals.find(n) != vals.end())
-        {
-            if (n != nums[i])
-            {
-                cout << i << " " << distance(nums, find(nums, nums + inp, n)) << endl;
-            }
-            return 0;
+        int f = pair.first;
+        int s = pair.second;
+
+        if(f == s) {
+
         }
-    }
 
+
+
+        cout << "Element: " << pair.first << " Count: " << pair.second << endl;
+    }
+       
     return 0;
 }
-
-class Solution {
-public:
-    vector<int> twoSum(vector<int>& nums, int target) {
-        unordered_map<int,int> vals;
-        vector<int> result;
-        int inp = nums.size();
-
-        for (int i = 0; i < inp; i++) {
-            vals.insert(make_pair(nums[i],i));
-        }
-
-        for (int i = 0; i < inp; ++i) {
-            int complement = target - nums[i];
-            if (vals.find(complement) != vals.end() && vals[complement] != i) {
-                result.push_back(i);
-                result.push_back(distance(nums.begin(), find(nums.begin(), nums.end(), complement)));
-                return result;
-                
-            }
-        }
-
-        return result;
-
-    }
-};
