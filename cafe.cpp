@@ -1,50 +1,26 @@
-#include <bits/stdc++.h>
+#include <iostream>
 using namespace std;
 
-struct team
-{
-    string name;
-    int score = 0;
-};
-bool isEmpty(string name)
-{
-    if (name.length() == 0)
-    {
-        return 1;
+long long find_kth_largest(long long n, long long m, long long k) {
+    long long left = 1, right = n * m;
+    while (left < right) {
+        long long mid = (left + right) / 2;
+        long long count = 0;
+        for (long long i = 1; i <= n; ++i) {
+            count += min(mid / i, m);
+        }
+        if (count < k) {
+            left = mid + 1;
+        } else {
+            right = mid;
+        }
     }
-    return 0;
+    return left;
 }
-int main()
-{
-    int n;
-    cin >> n;
-    struct team team1;
-    struct team team2;
-    string inp;
-    while (n--)
-    {
-        cin >> inp;
-        if (isEmpty(team1.name))
-        {
-            team1.name = inp;
-            team1.score++;
-        }
-        else if (team1.name == inp)
-        {
-            team1.score++;
-        }
-        else
-        {
-            team2.name = inp;
-            team2.score++;
-        }
-    }
 
-    if (team1.score > team2.score)
-    {
-        cout << team1.name;
-        return 0;
-    }
-    cout << team2.name;
+int main() {
+    long long n, m, k;
+    cin >> n >> m >> k;
+    cout << find_kth_largest(n, m, k) << endl;
     return 0;
 }

@@ -1,34 +1,24 @@
 #include <bits/stdc++.h>
-#include <unordered_set>
 using namespace std;
-unordered_map<int, int> num;
+
+vector<int> findIntersectionValues(vector<int>& nums1, vector<int>& nums2) {
+    unordered_set<int> it(nums1.begin(), nums1.end());
+    vector<int> ans;
+    for (int i = 0; i < nums2.size(); i++)
+    {
+        if(it.find(nums2[i]) != it.end()){
+            ans.push_back(i);
+        }
+    }
+    return ans;
+}
 
 int main()
 {
-    int n;
-    cin >> n;
-    for (int i = 0; i < n; i++)
-    {
-        int numb;
-        cin >> numb;
-        num[numb]++;
-    }
-    int ans = 0;
+    
+    
+    
+    cout<< isalnum('$');
 
-    for (const auto& pair : num) {
-
-        int f = pair.first;
-        int s = pair.second;
-
-        if(f == s) {
-            continue;
-        }else if(f < s) {
-            ans += (s-f);
-        }else{
-            ans += s;
-        }
-    }
-    cout << ans << endl;
-       
     return 0;
 }
