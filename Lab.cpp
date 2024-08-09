@@ -1,59 +1,64 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int furthestBuilding(vector<int> &heights, int bricks, int ladders)
-{
-    //4,2,7,6,9,14,12  r= 3
-    int r = 0;
-    for (int i = 0; i < heights.size(); i++)
-    {
-        int b = 0;
-        if (heights[i] >= heights[i + 1])
-        {
-            r++;
-            continue;
-        }else if(bricks == 0 && ladders == 0 && heights[i] < heights[i + 1]){
-            break;
-        }
+struct obj{
+    int age;
+    double score;
+    string name;
+};
 
-        if (heights[i] < heights[i + 1])
-        {
-            b = (heights[i + 1] - heights[i]);
-            if (b <= bricks)
-            {
-                r++;
-                bricks -= b;
-            }
-            else if (ladders != 0)
-            {
-                r++;
-                ladders--;
-            }
-            else{
-                break;
-            }
+int partition(vector<obj> &arr, int low, int high) {
+    obj pivot = arr[high];
+    int i = low - 1;
+    for (int j = low; j < high; j++) {
+        bool condition = (arr[j].age < pivot.age) ||
+                         (arr[j].age == pivot.age && arr[j].score > pivot.score) ||
+                         (arr[j].age == pivot.age && arr[j].score == pivot.score && arr[j].name < pivot.name);
+        if (condition) {
+            i++;
+            swap(arr[i], arr[j]);
         }
     }
-    return r;
+    swap(arr[i + 1], arr[high]);
+    return i + 1;
+}
+void quicksort(vector<obj> &arr, int low, int high) {
+    if (low < high) {
+        int pi = partition(arr, low, high);
+        quicksort(arr, low, pi - 1);
+        quicksort(arr, pi + 1, high);
+    }
 }
 
 int main()
 {
-    //4,2,7,6,9,14,12
-    int bricks = 17;
-    int ladders =0;
-    //4,12,2,7,3,18,20,3,19
-    vector<int> heights;
-    heights.push_back(14);
-    heights.push_back(3);
-    heights.push_back(19);
-    heights.push_back(3);
-    // heights.push_back(3);
-    // heights.push_back(18);
-    // heights.push_back(20);
-    // heights.push_back(3);
-    // heights.push_back(19);
-    cout<<furthestBuilding(heights,bricks,ladders);
 
+    int n;
+    cin >> n;
+    vector<obj> id(n);
+    for (int i = 0; i < n; i++)
+    {
+        cin>>id[i].age;
+    }
+    for (int i = 0; i < n; i++)
+    {
+        cin>>id[i].score;
+    }
+    for (int i = 0; i < n; i++)
+    {
+        cin>>id[i].name;
+    }
+
+    quicksort(id, 0, n - 1);
+
+
+    cout << "Sorted objects:" << endl;
+    for (const auto &o : id) {
+        cout << "Age: " << o.age << ", Score: " << o.score << ", Name: " << o.name << endl;
+    }
+
+
+    
+    
     return 0;
 }

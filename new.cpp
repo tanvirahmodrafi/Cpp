@@ -1,36 +1,56 @@
 #include <bits/stdc++.h>
-
 using namespace std;
 
-struct Dragon {
-    int s;
-    int b;
-    bool operator < (const Dragon& other) const {
-        return s < other.s;
-    }
-};
-void main() {
-    int s, n;
-    cin >> s >> n;
+int main()
+{
+    int test;
+    cin >> test;
 
-    vector<Dragon> dragons(n);
-    
-    for (int i = 0; i < n; ++i) {
-        cin >> dragons[i].s >> dragons[i].b;
-    }
-    
-    sort(dragons.begin(), dragons.end());
-    
-    for (int i = 0; i < n; i++) {
-        if (s > dragons[i].s) {
-            s += dragons[i].b;
-        } else {
-            cout << "NO" << endl;
-            return ;
+    while(test--)
+    {
+        int n, k;
+        cin >> n >> k;
+
+        vector<int> inp(k);
+        vector<int> ans;
+        int ones = 0, maxs = 0, finalAns = 0;
+
+        for (int i = 0; i < k; i++)
+        {
+            cin >> inp[i];
         }
+
+        for (int i = 0; i < k; i++)
+        {
+            if(inp[i] == 1){
+                ones++;
+            } else {
+                maxs = max(maxs, inp[i]);
+            }
+        }
+        bool in = false;
+        for (int i = 0; i < k; i++)
+        {
+            if(inp[i] == 1){
+                continue;
+            } else if(inp[i] == maxs && !in){
+                in = true;
+                continue;
+            }else{
+                ans.push_back(inp[i]);
+            }
+        }
+        
+
+        finalAns += ones;
+
+        for (int i = 0; i < ans.size(); i++)
+        {
+            finalAns += ((ans[i] - 1)+ans[i]);
+        }
+
+        cout << finalAns << endl;
     }
 
-    cout << "YES" << endl;
-
-    return ;
+    return 0;
 }
