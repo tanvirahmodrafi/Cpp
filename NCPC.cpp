@@ -1,93 +1,44 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-struct ListNode
+int mySqrt(int x)
 {
-    int val;
-    ListNode *next;
-    ListNode() : val(0), next(nullptr) {}
-    ListNode(int x) : val(x), next(nullptr) {}
-    ListNode(int x, ListNode *next) : val(x), next(next) {}
-};
-
-ListNode *insertAtFirst(ListNode *head, int value)
-{
-    ListNode *temp = new ListNode(value);
-    temp->next = head;
-    head = temp;
-    return head;
-}
-
-ListNode *insertAtLast(ListNode *head, int value)
-{
-    ListNode *temp = new ListNode(value);
-    if (head == nullptr)
+    if (x == 0 || x == 1)
+        return x;
+    int left = 1;
+    int right = x;
+    int result = 0;
+    while (left <= right)
     {
-        head = temp;
-    }
-    else
-    {
-        ListNode *t = head;
-        while (t->next != nullptr)
+        int mid = left + (right - left) / 2;
+        long long square = (long long)mid * mid;
+        if (square == x)
+            return mid;
+        else if (square > x)
         {
-            t = t->next;
+            right = mid - 1;
         }
-        t->next = temp;
-    }
-    return head;
-}
-
-ListNode *modifiedList(vector<int> &nums, ListNode *head)
-{
-    if (nums.empty() || head == nullptr)
-        return head;
-
-    ListNode *heads = nullptr;
-    unordered_set<int> numSet(nums.begin(), nums.end());
-
-    ListNode *cur = head;
-    while (cur != nullptr)
-    {
-        if (numSet.find(cur->val) == numSet.end())
+        else
         {
-            if (heads == nullptr)
-            {
-                heads = new ListNode(cur->val);
-            }
-            else
-            {
-                insertAtLast(heads, cur->val);
-            }
+            left = mid + 1;
+            result = mid;
         }
-        cur = cur->next;
     }
-
-    return heads;
+    return result;
 }
 
 int main()
 {
-    // Example usage of the code
+    int num;
 
-    // Creating a list 1 -> 2 -> 3 -> 4 -> 5
-    ListNode *head = new ListNode(1);
-    head->next = new ListNode(2);
-    head->next->next = new ListNode(3);
-    head->next->next->next = new ListNode(4);
-    head->next->next->next->next = new ListNode(5);
-
-    vector<int> nums;
-    nums.push_back(2);
-    nums.push_back(4); // Elements to remove
-
-    ListNode *newHead = modifiedList(nums, head);
-
-    // Output the modified list
-    ListNode *cur = newHead;
-    while (cur != nullptr)
+    int t;
+    cin >> t;
+    while (t--)
     {
-        cout << cur->val << " ";
-        cur = cur->next;
+        cin >> num;
+        int ans = 0;
+        ans = (num%10) + (num/10);
+        cout << ans << endl;
     }
 
     return 0;
