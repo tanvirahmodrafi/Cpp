@@ -1,56 +1,162 @@
-#include <bits/stdc++.h>
+// #include <bits/stdc++.h>
+// using namespace std;
+
+// bool isSquare(int n)
+// {
+//     int root = sqrt(n);
+//     return root * root == n;
+// }
+
+// int main()
+// {
+//     int test;
+//     cin >> test;
+
+//     while (test--)
+//     {
+//         string s;
+//         cin >> s;
+//         int n;
+//         cin >> n;
+//         bool valid = true;
+
+//         if(n<4){
+//             cout << "No"<< endl;
+//             continue;
+//         }
+
+//         if(n == 4 ){
+//             for (int i = 0; i < 4; i++)
+//             {
+//                 if (s[i] != '1'){
+//                     valid = false;
+//                 }
+//             }
+            
+//         }
+//         if(valid == false){
+//             continue;
+//         }
+
+//         if (!isSquare(n))
+//         {
+//             cout << "NO" << endl;
+//             continue;
+//         }
+
+//         int m = sqrt(n);
+        
+//         for (int i = 0; i < m ; i++)
+//         {
+//             if (s[i] != '1')
+//             {
+//                 valid = false;
+//                 break;
+//             }
+//         }
+
+        
+//         if (valid)
+//         {
+//             for (int i = m; i < n - m; i++)
+//             {
+//                 if ((i % m == 0 || (i + 1) % m == 0) && s[i] != '1')
+//                 {
+//                     valid = false;
+//                     break;
+//                 }
+//                 if( (i % m != 0 ) && ((i + 1) % m != 0) && s[i] != '0'){
+//                     valid = false;
+//                     break;
+//                 }
+//             }
+//         }
+
+        
+//         if (valid)
+//         {
+//             for (int i = n - m + 1; i < n; i++)
+//             {
+//                 if (s[i] != '1')
+//                 {
+//                     valid = false;
+//                     break;
+//                 }
+//             }
+//         }
+
+//         if (valid)
+//         {
+//             cout << "YES" << endl;
+//         }
+//         else
+//         {
+//             cout << "NO" << endl;
+//         }
+//     }
+
+//     return 0;
+// }
+
+
+#include <iostream>
+#include <cmath>
 using namespace std;
 
-int main()
-{
-    int test;
-    cin >> test;
+bool isPerfectSquare(int n) {
+    int root = sqrt(n);
+    return root * root == n;
+}
 
-    while(test--)
-    {
-        int n, k;
-        cin >> n >> k;
-
-        vector<int> inp(k);
-        vector<int> ans;
-        int ones = 0, maxs = 0, finalAns = 0;
-
-        for (int i = 0; i < k; i++)
-        {
-            cin >> inp[i];
+bool isBeautifulSquareMatrix(const string& s, int r) {
+    // First row and last row
+    for (int i = 0; i < r; i++) {
+        if (s[i] != '1' || s[(r - 1) * r + i] != '1') {
+            return false;
         }
-
-        for (int i = 0; i < k; i++)
-        {
-            if(inp[i] == 1){
-                ones++;
-            } else {
-                maxs = max(maxs, inp[i]);
+    }
+    
+    // First and last columns
+    for (int i = 1; i < r - 1; i++) {
+        if (s[i * r] != '1' || s[i * r + r - 1] != '1') {
+            return false;
+        }
+    }
+    
+    // Check inner cells
+    for (int i = 1; i < r - 1; i++) {
+        for (int j = 1; j < r - 1; j++) {
+            if (s[i * r + j] != '0') {
+                return false;
             }
         }
-        bool in = false;
-        for (int i = 0; i < k; i++)
-        {
-            if(inp[i] == 1){
-                continue;
-            } else if(inp[i] == maxs && !in){
-                in = true;
-                continue;
-            }else{
-                ans.push_back(inp[i]);
-            }
+    }
+    
+    return true;
+}
+
+int main() {
+    int t;
+    cin >> t;
+    
+    while (t--) {
+        int n;
+        string s;
+        cin >> n >> s;
+        
+        if (!isPerfectSquare(n)) {
+            cout << "No" << endl;
+            continue;
         }
         
-
-        finalAns += ones;
-
-        for (int i = 0; i < ans.size(); i++)
-        {
-            finalAns += ((ans[i] - 1)+ans[i]);
+        int r = sqrt(n);
+        
+        if (isBeautifulSquareMatrix(s, r)) {
+            cout << "Yes" << endl;
+        } else {
+            cout << "No" << endl;
         }
-
-        cout << finalAns << endl;
     }
-
+    
     return 0;
 }
