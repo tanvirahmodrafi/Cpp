@@ -1,43 +1,29 @@
-#include <iostream>
-#include <vector>
-#include <algorithm>
-
+#include <bits/stdc++.h>
 using namespace std;
 
 int main() {
-    int t;
-    cin >> t;
+    int n;
+    long long s;
+    cin >> n >> s;
 
-    while (t--) {
-        int n, f, k;
-        cin >> n >> f >> k;
-
-        vector<int> a(n);
-        for (int i = 0; i < n; ++i) {
-            cin >> a[i];
-        }
-
-        int favorite_value = a[f - 1];
-        sort(a.begin(), a.end(), greater<int>());
-
-        int favorite_count = count(a.begin(), a.end(), favorite_value);
-        int first_occurrence = -1;
-        for (int i = 0; i < n; ++i) {
-            if (a[i] == favorite_value) {
-                first_occurrence = i;
-                break;
-            }
-        }
-        int last_occurrence = first_occurrence + favorite_count - 1;
-
-        if (last_occurrence < k) {
-            cout << "YES" << endl;
-        } else if (first_occurrence >= k) {
-            cout << "NO" << endl;
-        } else {
-            cout << "MAYBE" << endl;
-        }
+    vector<long long > a(n);
+    for (int i = 0; i < n; i++) {
+        cin >> a[i];
     }
-
+    long long count= 0,sum = 0;
+    long long  l = 0,r=0;
+    map<long long ,long long> q;
+    while(r<n) {
+        sum+=a[r];
+        while(sum>s) {
+            sum-=a[l];
+            l++;
+        }
+        long long n = r-l+1;
+        count+=n*(n+1)/2;
+        r++;
+    }
+    //hello
+    cout << count << endl;
     return 0;
 }
