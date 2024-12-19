@@ -10,7 +10,7 @@ vector<int> findGridDimensions(int k, vector<int>& nums) {
         if (k % n == 0) {
             int m = k / n;
 
-            // Check if the grid with n rows and m columns is sorted row-wise
+            
             bool isValid = true;
             for (int i = 0; i < n; ++i) { // for each row
                 for (int j = 1; j < m; ++j) { // for each column in the row
