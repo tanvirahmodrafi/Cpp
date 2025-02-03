@@ -1,54 +1,24 @@
-#include<bits/stdc++.h>
-using namespace std ;
+#include <bits/stdc++.h>
 
-int main()
-{
-    // ios_base::sync_with_stdio(false);
-    // cin.tie(NULL);
-    // int t;
-    // string s;
-    // cin>>t;
-    //
-    // while(t--) {
-    //     int n,m;
-    //     cin>>n>>m;
-    //     int ans=0;
-    //     vector <string> v(n);
-    //     for(int i=0;i<n;i++) {
-    //         cin>>v[i];
-    //     }
-    //     for(int i=0;i<n;i++) {
-    //         int a = v[i].size();
-    //         if(a<=m) {
-    //             m-=a;
-    //             ans++;
-    //         }else break;
-    //     }
-    //     cout<<ans<<"\n";
-    // }
-    vector<double> v ;
-    v.push_back(3);
-    v.push_back(3);
-    v.push_back(3);
-    v.push_back(3);
-    v.push_back(3);
-    v.push_back(3);
-    v.push_back(3);
-    v.push_back(3);
-    v.push_back(3);
-    v.push_back(3);
-    v.push_back(3);
-    v.push_back(3);
-    v.push_back(3);
-    v.push_back(3);
-    v.push_back(3);
-    v.push_back(3);
-    v.push_back(3);
-    cout << v.capacity() << endl;
+using namespace std;
 
+int main() {
+    string inp;
+    cin >> inp;
+    int one = 0;
+    int len = inp.length();
 
-
-
-    return 0 ;
+    for (int i = 1; i < len; i++) {
+        while(inp[i] == inp[i - 1]) {
+            one++;
+            i++;
+        }
+        if(one >= 6) {
+            cout <<"YES"<<endl;
+            return 0;
+        }
+        one = 0;
+    }
+    cout <<"NO"<<endl;
+    return 0;
 }
-

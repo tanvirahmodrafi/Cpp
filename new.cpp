@@ -2,26 +2,22 @@
 
 using namespace std;
 
-struct student{
-    int age;
-    string name;
-};
-
-
 int main() {
+    string inp;
+    cin >> inp;
+    int n = inp.size();
+    int i = 0;
+    string ans;
+    while (i < n) {
+        if ((n-i > 2) and inp[i] == 'W' and inp[i+1] == 'U' and inp[i+2] == 'B') {
+            i+=3;
+        }else{
+            ans +=inp[i];
+            i++;
+        }
+        
+    }
+    cout << ans << endl;
     
-    student s1;
-
-    int a ;
-    char buf;
-    string str;
-    str = "123";
-    char data[19];
-
-    s1.age = 10;
-    s1.name = "Rafi";
-
-    cout << s1.name << endl;
-
     return 0;
 }
