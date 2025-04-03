@@ -11,7 +11,7 @@ int numberOfIP(int n) {
     return power;
 }
 
-//
+// convert final ip
 string ipToString(vector<int> ip) {
     return to_string(ip[0]) + "." + to_string(ip[1]) + "." + to_string(ip[2]) + "." + to_string(ip[3]);
 }
@@ -58,7 +58,7 @@ vector<int> split(const string &s) {
 bool checkValidIp(vector<int> ip) {
     if (ip.size() != 4) return false;
     for (int i = 0; i < 4; i++) {
-        if (!(ip[i] >= 0 && ip[i] < 256)) {
+        if (!(ip[i] >= 0 && ip[i] < 256 and ip[i] > -1)) {
             return false;
         }
     }
@@ -95,6 +95,7 @@ int main() {
         int requiredIPs;
         cout << "Number of IPs required in subnet " << i + 1 << ": ";
         cin >> requiredIPs;
+        if(requiredIPs == 0) {i--;n--;continue;}
         subNets.push_back(numberOfIP(requiredIPs));
     }
 
@@ -111,26 +112,29 @@ int main() {
     int sn = ips[4];  // Subnet mask
     ips.pop_back();   // Remove subnet mask
 
-    if (ips.size() != 4 or !checkValidIp(ips)) {
+    int totalIPs = accumulate(subNets.begin(), subNets.end(), 0);
+    __promote<int, int>::type availableIPs = pow(2, 32 - sn);
+
+    if (ips.size() != 4 or !checkValidIp(ips) or totalIPs > availableIPs or sn < 8 or sn>31) {
         cout << "Invalid IP format. Please enter in format x.x.x.x/y" << endl;
         return 0;
+    }else {
+        vector<int> currentIP = getNetworkID(ips, sn); // Get starting network ID
+        cout << "Network ID: " << "\tBroadcast ID: "<<"\tSubnet Mask: "<<endl;
+
+        for (int i = 0; i < n; i++) {
+            int hostBits = log2(subNets[i]); // Bits needed for hosts
+            int newMask = 32 - hostBits;           // New subnet mask
+
+            vector<int> networkID = ips;
+            vector<int> broadcastID = binaryAdd(ips, subNets[i] - 1);
+            ips = binaryAdd(broadcastID, 1);
+
+            cout << "Subnet " << i + 1 << ":\n";
+            cout << ipToString(networkID) <<'\t'<<'\t'<< ipToString(broadcastID) <<'\t'<<'\t'<< newMask << endl;
+        }
     }
 
-    vector<int> currentIP = getNetworkID(ips, sn); // Get starting network ID
-    cout << "Network ID: " << "\tBroadcast ID: "<<"\tSubnet Mask: "<<endl;
-
-    for (int i = 0; i < n; i++) {
-        int hostBits = log2(subNets[i]); // Bits needed for hosts
-        int newMask = 32 - hostBits;           // New subnet mask
-
-        vector<int> networkID = ips;
-        vector<int> broadcastID = binaryAdd(ips, subNets[i] - 1);
-        ips = binaryAdd(broadcastID, 1);
-
-        cout << "Subnet " << i + 1 << ":\n";
-        cout << ipToString(networkID) <<'\t'<<'\t'<< ipToString(broadcastID) <<'\t'<<'\t'<< newMask << endl;
-
-    }
 
     return 0;
 }
